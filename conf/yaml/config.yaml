@@ -1,0 +1,10 @@
+server:
+  mode: debug #启动模式 debug, release
+  port: :8081 #启动端口
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  dbname: gin_framework
+  user: root
+  password: root
