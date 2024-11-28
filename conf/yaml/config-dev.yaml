@@ -1,6 +1,6 @@
 server:
-  mode: debug #启动模式 debug, release
-  port: :8081 #启动端口
+  mode: debug # 启动模式 debug, release
+  port: :8081 # 启动端口
 
 mysql:
   host: 127.0.0.1
@@ -8,3 +8,17 @@ mysql:
   dbname: gin_framework
   user: root
   password: root
+
+log:
+  fileName: "./logs/example.log"  # 日志文件路径
+  maxSize: 1  # 每个日志文件保存的最大尺寸 单位：M
+  maxAge: 7  # 文件最多保存多少天
+  maxBackups: 5  # 日志文件最多保存多少个备份
+  messageKey: "msg"
+  levelKey: "level"
+  timeKey: "time"
+  nameKey: "logger"
+  callerKey: "caller"
+  stacktraceKey: "stacktrace"
+  logformatJson: "json"
+  logformatConsole: "console"

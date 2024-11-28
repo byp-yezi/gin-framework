@@ -13,6 +13,7 @@ var GlobalConfig *Config
 type Config struct {
 	Server Server `yaml:"server"`
 	Mysql  Mysql  `yaml:"mysql"`
+	Log    Log    `yaml:"log:`
 }
 
 type Server struct {
@@ -28,12 +29,27 @@ type Mysql struct {
 	Password string `yaml:"password"`
 }
 
+type Log struct {
+	FileName         string `yaml:"fileName"`
+	MaxSize          int    `yaml:"maxSize"`
+	MaxAge           int    `yaml:"maxAge"`
+	MaxBackups       int    `yaml:"maxBackups"`
+	MessageKey       string `yaml:"messageKey"`
+	LevelKey         string `yaml:"levelKey"`
+	TimeKey          string `yaml:"timeKey"`
+	NameKey          string `yaml:"nameKey"`
+	CallerKey        string `yaml:"callerKey"`
+	StacktraceKey    string `yaml:"stacktraceKey"`
+	LogformatJson    string `yaml:"logformatJson"`
+	LogformatConsole string `yaml:"logformatConsole"`
+}
+
 var envConfig = pflag.String("env", "dev", "Example: go run main.go --env=dev")
 
 // InitConfig 初始化配置
 func InitConfig() {
 	pflag.Parse()
-	
+
 	config := viper.New()
 	workDir, _ := os.Getwd()
 	config.AddConfigPath(workDir + "/conf/yaml/")

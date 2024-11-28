@@ -1,13 +1,13 @@
 package handler
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
+
+	"gin-framework/pkg/e"
 )
 
 func GetUserHandler(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"msg": "ok",
-	})
+	e.Success(ctx)
+	zap.L().Warn("测试zap日志输出", zap.String("key1", "value1"))
 }
