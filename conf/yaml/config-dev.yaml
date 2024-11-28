@@ -10,7 +10,7 @@ mysql:
   password: root
 
 log:
-  fileName: "./logs/example.log"  # 日志文件路径
+  fileName: "./logs/example-dev.log"  # 日志文件路径
   maxSize: 1  # 每个日志文件保存的最大尺寸 单位：M
   maxAge: 7  # 文件最多保存多少天
   maxBackups: 5  # 日志文件最多保存多少个备份

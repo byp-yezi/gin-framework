@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"gin-framework/internal/router/user"
+	"gin-framework/app/router/user"
 )
 
 func InitRouter() *gin.Engine {

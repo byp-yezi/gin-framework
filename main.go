@@ -1,28 +1,28 @@
 package main
 
 import (
-	"fmt"
+	"gin-framework/app/utils"
 	"gin-framework/initialize"
 
 	"go.uber.org/zap"
 )
 
 func main() {
+	// 配置初始化
 	initialize.InitConfig()
 
-	switch initialize.GlobalConfig.Server.Mode {
-	case "debug":
-		initialize.InitZapLog(zap.DebugLevel, initialize.GlobalConfig.Log.LogformatConsole)
-		fmt.Println("1111111111111")
-	case "release":
-		initialize.InitZapLog(zap.InfoLevel, initialize.GlobalConfig.Log.LogformatConsole)
-		fmt.Println("2222222222222")
-	default:
-		initialize.InitZapLog(zap.InfoLevel, initialize.GlobalConfig.Log.LogformatConsole)
-		fmt.Println("3333333333333")
-	}
+	// zap初始化
+	initialize.InitZapLog()
 	
+	// mysql初始化
 	initialize.InitMysql()
+
+	// validator初始化
+	if err := utils.InitTrans("zh"); err != nil {
+		zap.S().Fatalf("init trans failed, err: ", err.Error())
+	}
+
+	// 路由初始化
 	router := initialize.InitRouter()
 	router.Run(initialize.GlobalConfig.Server.Port)
 }
