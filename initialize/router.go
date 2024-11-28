@@ -14,7 +14,7 @@ func InitRouter() *gin.Engine {
 	if GlobalConfig.Server.Mode == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	r := gin.Default()
+	r := gin.New()
 	r.Use(ginzap.Ginzap(zap.L(), time.RFC3339, false))
 	r.Use(ginzap.RecoveryWithZap(zap.L(), false))
 	// 路由分组

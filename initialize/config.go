@@ -13,7 +13,7 @@ var GlobalConfig *Config
 type Config struct {
 	Server Server `yaml:"server"`
 	Mysql  Mysql  `yaml:"mysql"`
-	Log    Log    `yaml:"log:`
+	Log    Log    `yaml:"log"`
 }
 
 type Server struct {
