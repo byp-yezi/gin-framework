@@ -6,27 +6,29 @@ import (
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"gin-framework/config"
 )
 
 func InitZapLog() {
-	switch GlobalConfig.Server.Mode {
+	switch config.GlobalConfig.Server.Mode {
 	case "debug":
-		ZapLog(zap.DebugLevel, GlobalConfig.Log.LogformatConsole)
+		ZapLog(zap.DebugLevel, config.GlobalConfig.Log.LogformatConsole)
 	case "release":
-		ZapLog(zap.InfoLevel, GlobalConfig.Log.LogformatConsole)
+		ZapLog(zap.InfoLevel, config.GlobalConfig.Log.LogformatConsole)
 	default:
-		ZapLog(zap.InfoLevel, GlobalConfig.Log.LogformatConsole)
+		ZapLog(zap.InfoLevel, config.GlobalConfig.Log.LogformatConsole)
 	}
 }
 
 func ZapLog(logLevel zapcore.Level, logFormat string) {
 	encoderConfig := zapcore.EncoderConfig{
-		MessageKey:     GlobalConfig.Log.MessageKey,
-		LevelKey:       GlobalConfig.Log.LevelKey,
-		TimeKey:        GlobalConfig.Log.TimeKey,
-		NameKey:        GlobalConfig.Log.NameKey,
-		CallerKey:      GlobalConfig.Log.CallerKey,
-		StacktraceKey:  GlobalConfig.Log.StacktraceKey,
+		MessageKey:     config.GlobalConfig.Log.MessageKey,
+		LevelKey:       config.GlobalConfig.Log.LevelKey,
+		TimeKey:        config.GlobalConfig.Log.TimeKey,
+		NameKey:        config.GlobalConfig.Log.NameKey,
+		CallerKey:      config.GlobalConfig.Log.CallerKey,
+		StacktraceKey:  config.GlobalConfig.Log.StacktraceKey,
 		LineEnding:     zapcore.DefaultLineEnding,
 		EncodeLevel:    zapcore.CapitalLevelEncoder,
 		EncodeTime:     zapcore.ISO8601TimeEncoder,
@@ -38,9 +40,9 @@ func ZapLog(logLevel zapcore.Level, logFormat string) {
 	// 设置日志输出格式
 	var encoder zapcore.Encoder
 	switch logFormat {
-	case GlobalConfig.Log.LogformatJson:
+	case config.GlobalConfig.Log.LogformatJson:
 		encoder = zapcore.NewJSONEncoder(encoderConfig)
-	case GlobalConfig.Log.LogformatConsole:
+	case config.GlobalConfig.Log.LogformatConsole:
 		encoder = zapcore.NewConsoleEncoder(encoderConfig)
 	default:
 		encoder = zapcore.NewConsoleEncoder(encoderConfig)
@@ -49,10 +51,10 @@ func ZapLog(logLevel zapcore.Level, logFormat string) {
 
 	// 添加日志切割归档功能
 	hook := lumberjack.Logger{
-		Filename:   GlobalConfig.Log.FileName,
-		MaxSize:    GlobalConfig.Log.MaxSize,
-		MaxAge:     GlobalConfig.Log.MaxAge,
-		MaxBackups: GlobalConfig.Log.MaxBackups,
+		Filename:   config.GlobalConfig.Log.FileName,
+		MaxSize:    config.GlobalConfig.Log.MaxSize,
+		MaxAge:     config.GlobalConfig.Log.MaxAge,
+		MaxBackups: config.GlobalConfig.Log.MaxBackups,
 		Compress:   true,
 	}
 

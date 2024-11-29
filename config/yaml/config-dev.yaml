@@ -22,3 +22,7 @@ log:
   stacktraceKey: "stacktrace"
   logformatJson: "json"
   logformatConsole: "console"
+
+jwt:
+  secret: your_secret # jwt签名加密时使用的秘钥
+  tokenKey: x-token # token的键名

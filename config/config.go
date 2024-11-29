@@ -1,4 +1,4 @@
-package initialize
+package config
 
 import (
 	"fmt"
@@ -14,6 +14,7 @@ type Config struct {
 	Server Server `yaml:"server"`
 	Mysql  Mysql  `yaml:"mysql"`
 	Log    Log    `yaml:"log"`
+	Jwt    Jwt    `yaml:"jwt"`
 }
 
 type Server struct {
@@ -44,6 +45,11 @@ type Log struct {
 	LogformatConsole string `yaml:"logformatConsole"`
 }
 
+type Jwt struct {
+	Secret string `yaml:"secret"`
+	TokenKey string `yaml:"tokenKey"`
+}
+
 var envConfig = pflag.String("env", "dev", "Example: go run main.go --env=dev")
 
 // InitConfig 初始化配置
@@ -52,7 +58,7 @@ func InitConfig() {
 
 	config := viper.New()
 	workDir, _ := os.Getwd()
-	config.AddConfigPath(workDir + "/conf/yaml/")
+	config.AddConfigPath(workDir + "/config/yaml/")
 	config.SetConfigName(fmt.Sprintf("config-%s", *envConfig))
 	config.SetConfigType("yaml")
 	if err := config.ReadInConfig(); err != nil {

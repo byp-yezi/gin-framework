@@ -6,10 +6,12 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+
+	"gin-framework/config"
 )
 
 func InitMysql() *gorm.DB {
-	mConfig := GlobalConfig.Mysql
+	mConfig := config.GlobalConfig.Mysql
 	dsn := fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		mConfig.User,
 		mConfig.Password,

@@ -1,15 +1,16 @@
 package main
 
 import (
+	"go.uber.org/zap"
+	
 	"gin-framework/app/utils"
 	"gin-framework/initialize"
-
-	"go.uber.org/zap"
+	"gin-framework/config"
 )
 
 func main() {
 	// 配置初始化
-	initialize.InitConfig()
+	config.InitConfig()
 
 	// zap初始化
 	initialize.InitZapLog()
@@ -24,5 +25,5 @@ func main() {
 
 	// 路由初始化
 	router := initialize.InitRouter()
-	router.Run(initialize.GlobalConfig.Server.Port)
+	router.Run(config.GlobalConfig.Server.Port)
 }

@@ -33,8 +33,15 @@ func SuccessWithDetail(ctx *gin.Context, msg string, data interface{}) {
 	ResponseJson(ctx, e.SUCCESS, e.SUCCESS, msg, data)
 }
 
-func Fail(ctx *gin.Context, dataCode int, msg string, data interface{}) {
-	ResponseJson(ctx, e.ERROR, dataCode, msg, data)
+func Fail(ctx *gin.Context, msg string, data interface{}) {
+	ResponseJson(ctx, e.ERROR, e.ERROR, msg, data)
+}
+
+func UnauthorizedException(ctx *gin.Context, msg string) {
+	if msg == "" {
+		msg = e.GetMsg(e.Unauthorized)
+	}
+	ResponseJson(ctx, e.Unauthorized, e.Unauthorized, msg, nil)
 }
 
 func ValidatorError(ctx *gin.Context, err error) {

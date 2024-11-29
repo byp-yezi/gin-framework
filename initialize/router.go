@@ -8,10 +8,11 @@ import (
 	"go.uber.org/zap"
 
 	"gin-framework/app/router/user"
+	"gin-framework/config"
 )
 
 func InitRouter() *gin.Engine {
-	if GlobalConfig.Server.Mode == "release" {
+	if config.GlobalConfig.Server.Mode == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.New()
@@ -19,7 +20,7 @@ func InitRouter() *gin.Engine {
 	r.Use(ginzap.RecoveryWithZap(zap.L(), false))
 	// 路由分组
 	var (
-		userGroup = r.Group("/")
+		userGroup = r.Group("/user")
 	)
 	user.InitUserGroup(userGroup)
 	return r
