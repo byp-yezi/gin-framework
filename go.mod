@@ -3,6 +3,7 @@ module gin-framework
 go 1.22.2
 
 require (
+	github.com/gin-contrib/cors v1.7.2
 	github.com/gin-contrib/zap v1.1.4
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/locales v0.14.1

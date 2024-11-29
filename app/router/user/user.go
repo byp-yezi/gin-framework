@@ -8,7 +8,7 @@ import (
 )
 
 
-func InitUserGroup(r *gin.RouterGroup) (router gin.IRoutes) {
+func InitUserGroup(r *gin.RouterGroup) gin.IRoutes {
 	r.POST("login", handler.LoginHandler)
 	r.Use(middleware.Jwt())
 	{

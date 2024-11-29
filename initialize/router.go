@@ -9,6 +9,7 @@ import (
 
 	"gin-framework/app/router/user"
 	"gin-framework/config"
+	"gin-framework/middleware"
 )
 
 func InitRouter() *gin.Engine {
@@ -18,6 +19,7 @@ func InitRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(ginzap.Ginzap(zap.L(), time.RFC3339, false))
 	r.Use(ginzap.RecoveryWithZap(zap.L(), false))
+	r.Use(middleware.Cors())
 	// 路由分组
 	var (
 		userGroup = r.Group("/user")
