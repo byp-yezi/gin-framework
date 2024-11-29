@@ -2,7 +2,7 @@ package main
 
 import (
 	"go.uber.org/zap"
-	
+
 	"gin-framework/app/utils"
 	"gin-framework/initialize"
 	"gin-framework/config"

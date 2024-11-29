@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 
 	"gin-framework/app/types"
 	"gin-framework/app/utils"
@@ -27,6 +28,7 @@ func LoginHandler(ctx *gin.Context) {
 		CreateAt: time.Now().Unix(),
 		Token: token,
 	}
+	zap.L().Info("This is an info message.")
 	utils.SuccessWithData(ctx, &resp)
 }
 
